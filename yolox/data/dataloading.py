@@ -21,6 +21,8 @@ def get_yolox_datadir():
     this function will return value of the environment variable. Otherwise, use data
     """
     yolox_datadir = os.getenv("YOLOX_DATADIR", None)
+    #yolox_datadir = "BlackIce.v1i.coco/train"
+
     if yolox_datadir is None:
         import yolox
 

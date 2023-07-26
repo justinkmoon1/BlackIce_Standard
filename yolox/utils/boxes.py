@@ -77,6 +77,7 @@ def postprocess(prediction, num_classes, conf_thre=0.7, nms_thre=0.45, class_agn
 
 
 def bboxes_iou(bboxes_a, bboxes_b, xyxy=True):
+    #print(bboxes_a.shape, bboxes_b.shape)
     if bboxes_a.shape[1] != 4 or bboxes_b.shape[1] != 4:
         raise IndexError
 

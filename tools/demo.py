@@ -9,6 +9,8 @@ from loguru import logger
 
 import cv2
 
+import numpy as np
+
 import torch
 
 from yolox.data.data_augment import ValTransform
@@ -28,7 +30,7 @@ def make_parser():
     parser.add_argument("-n", "--name", type=str, default=None, help="model name")
 
     parser.add_argument(
-        "--path", default="./assets/dog.jpg", help="path to images or video"
+        "--path", default="./assets/blackice_sample.jpg", help="path to images or video"
     )
     parser.add_argument("--camid", type=int, default=0, help="webcam demo camera id")
     parser.add_argument(
@@ -136,7 +138,6 @@ class Predictor(object):
             img = cv2.imread(img)
         else:
             img_info["file_name"] = None
-
         height, width = img.shape[:2]
         img_info["height"] = height
         img_info["width"] = width
@@ -152,28 +153,49 @@ class Predictor(object):
             img = img.cuda()
             if self.fp16:
                 img = img.half()  # to FP16
-
         with torch.no_grad():
             t0 = time.time()
             outputs = self.model(img)
             if self.decoder is not None:
                 outputs = self.decoder(outputs, dtype=outputs.type())
+
+            #print("pre-post", outputs)
+            #print(self.num_classes, self.confthre, self.nmsthre)
             outputs = postprocess(
                 outputs, self.num_classes, self.confthre,
                 self.nmsthre, class_agnostic=True
             )
+            #print(outputs)
+            # boxes = outputs[:, :4]
+            # scores = outputs[:, 4:5] * outputs[:, 5:]
+
+            # boxes_xyxy = np.ones_like(boxes)
+            # boxes_xyxy[:, 0] = boxes[:, 0] - boxes[:, 2]/2.
+            # boxes_xyxy[:, 1] = boxes[:, 1] - boxes[:, 3]/2.
+            # boxes_xyxy[:, 2] = boxes[:, 0] + boxes[:, 2]/2.
+            # boxes_xyxy[:, 3] = boxes[:, 1] + boxes[:, 3]/2.
+            # boxes_xyxy /= ratio 
+            # dets = self.multiclass_nms(boxes_xyxy, scores, nms_thr=nms_thr, score_thr=score_thr) 
+            # print(outputs[0][:, :4])
+            # print(outputs[0][:, 4])
+            # print(outputs[0][:, 5:])
+            
             logger.info("Infer time: {:.4f}s".format(time.time() - t0))
-        return outputs, img_info
+        #print("post", outputs)
+        return outputs[0], img_info
+
+
+
 
     def visual(self, output, img_info, cls_conf=0.35):
         ratio = img_info["ratio"]
         img = img_info["raw_img"]
+        #print(output)
         if output is None:
             return img
         output = output.cpu()
 
         bboxes = output[:, 0:4]
-
         # preprocessing: resize
         bboxes /= ratio
 
@@ -192,7 +214,8 @@ def image_demo(predictor, vis_folder, path, current_time, save_result):
     files.sort()
     for image_name in files:
         outputs, img_info = predictor.inference(image_name)
-        result_image = predictor.visual(outputs[0], img_info, predictor.confthre)
+        result_image = predictor.visual(outputs, img_info, predictor.confthre)
+        #result_image = predictor.visual(outputs, img_info, predictor.confthre)
         if save_result:
             save_folder = os.path.join(
                 vis_folder, time.strftime("%Y_%m_%d_%H_%M_%S", current_time)

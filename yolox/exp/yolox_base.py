@@ -18,7 +18,7 @@ class Exp(BaseExp):
 
         # ---------------- model config ---------------- #
         # detect classes number of model
-        self.num_classes = 80
+        self.num_classes = 5
         # factor of model depth
         self.depth = 1.00
         # factor of model width
@@ -39,12 +39,12 @@ class Exp(BaseExp):
         # dir of dataset images, if data_dir is None, this project will use `datasets` dir
         self.data_dir = None
         # name of annotation file for training
-        self.train_ann = "instances_train2017.json"
+        self.train_ann = "_annotations.coco.json"
         #self.train_ann = "instances_val2017.json"
         # name of annotation file for evaluation
-        self.val_ann = "instances_val2017.json"
+        self.val_ann = "_annotations.coco.json"
         # name of annotation file for testing
-        self.test_ann = "instances_test2017.json"
+        self.test_ann = "_annotations.coco.json"
 
         # --------------- transform config ----------------- #
         # prob of applying mosaic aug
@@ -70,12 +70,13 @@ class Exp(BaseExp):
         # epoch number used for warmup
         self.warmup_epochs = 5
         # max training epoch
-        self.max_epoch = 20
+        self.max_epoch = 300
         # minimum learning rate during warmup
         self.warmup_lr = 0
         self.min_lr_ratio = 0.05
         # learning rate for one image. During training, lr will multiply batchsize.
         self.basic_lr_per_img = 0.01 / 64.0
+        #self.basic_lr_per_img = 0.1 / 64.0
         # name of LRScheduler
         self.scheduler = "yoloxwarmcos"
         # last #epoch to close augmention like mosaic

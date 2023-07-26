@@ -39,8 +39,8 @@ class COCODataset(CacheDataset):
     def __init__(
         self,
         data_dir=None,
-        json_file="instances_train2017.json",
-        name="train2017",
+        json_file="instances_val2017.json",
+        name="val2017",
         img_size=(416, 416),
         preproc=None,
         cache=False,

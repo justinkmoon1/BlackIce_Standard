@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # Copyright (c) Megvii, Inc. and its affiliates.
 
-COCO_CLASSES = (
+"""COCO_CLASSES = (
     "person",
     "bicycle",
     "car",
@@ -83,4 +83,12 @@ COCO_CLASSES = (
     "teddy bear",
     "hair drier",
     "toothbrush",
+)"""
+
+COCO_CLASSES = (
+    "blackice",
+    "puddle",
+    "slush",
+    "snow",
+    "rain",
 )

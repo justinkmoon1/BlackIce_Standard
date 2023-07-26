@@ -40,6 +40,8 @@ class Trainer:
         self.exp = exp
         self.args = args
 
+        self.epoch_loss = []
+
         # training related attr
         self.max_epoch = exp.max_epoch
         self.amp_training = args.fp16
@@ -105,7 +107,8 @@ class Trainer:
             outputs = self.model(inps, targets)
 
         loss = outputs["total_loss"]
-
+        #print
+        self.epoch_loss.append(loss)
         self.optimizer.zero_grad()
         self.scaler.scale(loss).backward()
         self.scaler.step(self.optimizer)
@@ -216,7 +219,11 @@ class Trainer:
 
     def after_epoch(self):
         self.save_ckpt(ckpt_name="latest")
-
+        #print
+        loss = sum(self.epoch_loss)/len(self.epoch_loss)
+        if self.args.logger == "tensorboard":
+            self.tblogger.add_scalar("train/loss", loss, self.epoch) 
+            
         if (self.epoch + 1) % self.exp.eval_interval == 0:
             all_reduce_norm(self.model)
             self.evaluate_and_save_model()
