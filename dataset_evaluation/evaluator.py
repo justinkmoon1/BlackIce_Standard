@@ -37,10 +37,10 @@ class Evaluator():
 
 
     def prediction_process(self, prediction_dict_list, information):
+        if prediction_dict_list == None:
+            pass
         prediction_dict_list = prediction_dict_list.cpu()
         ratio = information["ratio"]
-        #print(ratio)
-        #print(prediction_dict_list)
         bboxes = prediction_dict_list[:, :4]
         bboxes /= ratio
         cls = prediction_dict_list[:, 6]

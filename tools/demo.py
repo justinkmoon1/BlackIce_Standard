@@ -158,30 +158,11 @@ class Predictor(object):
             outputs = self.model(img)
             if self.decoder is not None:
                 outputs = self.decoder(outputs, dtype=outputs.type())
-
-            #print("pre-post", outputs)
-            #print(self.num_classes, self.confthre, self.nmsthre)
             outputs = postprocess(
                 outputs, self.num_classes, self.confthre,
                 self.nmsthre, class_agnostic=True
             )
-            #print(outputs)
-            # boxes = outputs[:, :4]
-            # scores = outputs[:, 4:5] * outputs[:, 5:]
-
-            # boxes_xyxy = np.ones_like(boxes)
-            # boxes_xyxy[:, 0] = boxes[:, 0] - boxes[:, 2]/2.
-            # boxes_xyxy[:, 1] = boxes[:, 1] - boxes[:, 3]/2.
-            # boxes_xyxy[:, 2] = boxes[:, 0] + boxes[:, 2]/2.
-            # boxes_xyxy[:, 3] = boxes[:, 1] + boxes[:, 3]/2.
-            # boxes_xyxy /= ratio 
-            # dets = self.multiclass_nms(boxes_xyxy, scores, nms_thr=nms_thr, score_thr=score_thr) 
-            # print(outputs[0][:, :4])
-            # print(outputs[0][:, 4])
-            # print(outputs[0][:, 5:])
-            
             logger.info("Infer time: {:.4f}s".format(time.time() - t0))
-        #print("post", outputs)
         return outputs[0], img_info
 
 

@@ -1,8 +1,3 @@
-"""
-TODO
-이미지 인풋 사이즈가 맞는지
-postprocessing 시 음수 bounding box 위치 정보가 안 나오도록
-"""
 import os
 import json
 import cv2
@@ -128,8 +123,8 @@ def get_trained_model(experiment, weights):
     return model
 
 # 경로 설정
-DATA_PATH = "C:/Users/Justin Moon/BlackIce/blackice3.v1i.coco/train"
-ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/blackice3.v1i.coco/annot/_annotations.coco.json"
+DATA_PATH = "C:/Users/Justin Moon/BlackIce/TEST_DIR/images"
+ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/TEST_DIR/annotations/_annotations.coco..json"
 MODEL_PATH = "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/best_ckpt.pth"
 
 # data read
@@ -139,46 +134,18 @@ img_list = os.listdir(DATA_PATH)
 
 # evaluator 객체
 evaluator = Evaluator(DATA_PATH, ANNOT_PATH, MODEL_PATH)
-
-# model load
-# model = YOLOX()
-# saved_checkpoint = torch.load(MODEL_PATH)
-# model.load_state_dict(saved_checkpoint, strict = False)
-# model.eval()
 exps = get_exp("C:/Users/Justin Moon/BlackIce/exps/default/yolox_tiny.py", "yolox_tiny")
 model = exps.get_model()
 model.eval()
 ckpt = torch.load(MODEL_PATH, map_location = 'cpu')
 model.load_state_dict(ckpt["model"])
-#ckpt = torch.load(MODEL_PATH, map_location="gpu")
-# load the model state dict
-# model = get_trained_model(exps, MODEL_PATH)
-# model.to(torch.device('cuda'))
-#model.load_state_dict(ckpt["model"])
-#exps = MyExp()
-
-
-#model.to("cuda")
-
 predictor = Predictor(model, exps)
 
-# 모든 이미지 하나에 대한 gt, pred 비교해서 evaluator 객체에 저장하기
 for i in range(len(img_list)):
-    # if i > 0:
-    #     break
-    # gt file read
     actual_bbox, actual_class = evaluator.read_data(DATA_PATH + "/" + img_list[i], i)
-
-    # model inference - 학습할 때 설정했던 거로 evaluate 하거나, 실제 application에서 쓸 thr 사용
     prediction_list, info = predictor.inference(DATA_PATH + "/" + img_list[i])
-    #print(prediction_list.shape)
-    #postprocessing(prediction_list, 1, (416, 416), 0.6, 0.5)
-
     prediction_bbox, prediction_class = evaluator.prediction_process(prediction_list, info)
-    #print(actual_bbox, prediction_bbox)
-    # 단일 이미지 하나에 대한 gt, pred 비교해서 evaluator 객체에 저장하기
     evaluator.put_data(prediction_bbox, prediction_class, actual_bbox, actual_class)
-
 
 print(evaluator.cnts)
 # 전체 metric 계산

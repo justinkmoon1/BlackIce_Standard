@@ -1,2 +1,2 @@
-#python tools/demo.py image -n yolox_tiny -c ./YOLOX_outputs/yolox_tiny/$1 --path ./assets/$2 --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu
-python tools/demo.py image -n yolox_tiny -c ./YOLOX_outputs/yolox_tiny/best_ckpt.pth --path blackice3.v1i.coco/train/0a08fb90-2min_jpg.rf.68fcf3ef3fe64bd13d11a15fe5bb1aae.jpg --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu
+python tools/demo.py image -n yolox_tiny -c ./YOLOX_outputs/yolox_tiny/$1 --path ./assets/$2 --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu
+#python tools/demo.py image -n yolox_tiny -c ./YOLOX_outputs/yolox_tiny/best_ckpt.pth --path blackice3.v1i.coco/train/0a08fb90-2min_jpg.rf.68fcf3ef3fe64bd13d11a15fe5bb1aae.jpg --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu
