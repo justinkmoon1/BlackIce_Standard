@@ -37,8 +37,6 @@ class Evaluator():
 
 
     def prediction_process(self, prediction_dict_list, information):
-        if prediction_dict_list == None:
-            pass
         prediction_dict_list = prediction_dict_list.cpu()
         ratio = information["ratio"]
         bboxes = prediction_dict_list[:, :4]
@@ -91,7 +89,7 @@ class Evaluator():
 
         #print(actual_bbox_list)
         #print(len(pred_label_list), len(pred_bbox_list))
-        self.count_result(actual_label_list, actual_bbox_list, pred_label_list, pred_bbox_list, 0.5)
+        self.count_result(actual_label_list, actual_bbox_list, pred_label_list, pred_bbox_list, 0.1)
 
     def count_result(self, actual_label_list, actual_bbox_list, pred_label_list, pred_bbox_list, iou_thr):
         
@@ -99,12 +97,12 @@ class Evaluator():
         for i, pred_bbox in enumerate(pred_bbox_list):
             # iou 비교 
             for j, actual_bbox in enumerate(actual_bbox_list):
-                print(pred_bbox, actual_bbox)
+                #print(pred_bbox, actual_bbox)
                 iou = self.calc_iou(pred_bbox,actual_bbox)
-                print(iou)
+                #print(iou)
                 # label이 같으면 tp. 아니면 fp
                 if iou > iou_thr:
-                    #print(iou)
+                    print(iou)
                     if pred_label_list[i] == actual_label_list[j]:
                         self.cnts[pred_label_list[i]][1] += 1
                     else:

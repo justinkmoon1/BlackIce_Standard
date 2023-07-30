@@ -40,8 +40,9 @@ class Trainer:
         self.exp = exp
         self.args = args
 
+        #print
         self.epoch_loss = []
-
+        self.epoch_val_loss = []
         # training related attr
         self.max_epoch = exp.max_epoch
         self.amp_training = args.fp16
@@ -107,6 +108,7 @@ class Trainer:
             outputs = self.model(inps, targets)
 
         loss = outputs["total_loss"]
+        val_loss = outputs[""]
         #print
         self.epoch_loss.append(loss)
         self.optimizer.zero_grad()

@@ -1,8 +1,8 @@
 import os
 import json
 from PIL import Image
-IMAGE_PATH = "C:/Users/Justin Moon/BlackIce/blackice3.v1i.coco/train"
-ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/blackice3.v1i.coco/annot/_annotations.coco.json"
+IMAGE_PATH = "C:/Users/Justin Moon/BlackIce/datasets/blackice_indoors_trainset.v6i.coco/train"
+ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/datasets/blackice_indoors_trainset.v6i.coco/_annotations.coco.json"
 lst = os.listdir(IMAGE_PATH)
 
 for img in lst:
