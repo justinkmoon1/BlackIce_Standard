@@ -108,7 +108,7 @@ class Trainer:
             outputs = self.model(inps, targets)
 
         loss = outputs["total_loss"]
-        val_loss = outputs[""]
+        #val_loss = outputs[""]
         #print
         self.epoch_loss.append(loss)
         self.optimizer.zero_grad()
@@ -339,14 +339,16 @@ class Trainer:
             (ap50_95, ap50, summary), predictions = self.exp.eval(
                 evalmodel, self.evaluator, self.is_distributed, return_outputs=True
             )
-
+        #print - add code here
         update_best_ckpt = ap50_95 > self.best_ap
         self.best_ap = max(self.best_ap, ap50_95)
 
         if self.rank == 0:
             if self.args.logger == "tensorboard":
+                #print
                 self.tblogger.add_scalar("val/COCOAP50", ap50, self.epoch + 1)
                 self.tblogger.add_scalar("val/COCOAP50_95", ap50_95, self.epoch + 1)
+
             if self.args.logger == "wandb":
                 self.wandb_logger.log_metrics({
                     "val/COCOAP50": ap50,
