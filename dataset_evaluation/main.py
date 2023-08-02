@@ -125,7 +125,7 @@ def get_trained_model(experiment, weights):
 # 경로 설정
 DATA_PATH = "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/test"
 ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/_annotations.coco.json"
-MODEL_PATH = "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/best_ckpt_ind.pth"
+MODEL_PATH = "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/models/onetothree.pth"
 
 # data read
 with open(ANNOT_PATH, 'r') as f:
@@ -140,9 +140,10 @@ model.eval()
 ckpt = torch.load(MODEL_PATH, map_location = 'cpu')
 model.load_state_dict(ckpt["model"])
 predictor = Predictor(model, exps)
-
+cnt = 0
 for i in range(len(img_list)):
     actual_bbox, actual_class = evaluator.read_data(DATA_PATH + "/" + img_list[i], i)
+    cnt += len(actual_bbox)
     prediction_list, info = predictor.inference(DATA_PATH + "/" + img_list[i])
     if prediction_list == None:
         continue
@@ -150,7 +151,7 @@ for i in range(len(img_list)):
     print(len(prediction_class))
     evaluator.put_data(prediction_bbox, prediction_class, actual_bbox, actual_class)
 
-print(evaluator.cnts)
+print(evaluator.cnts, cnt)
 # 전체 metric 계산
 #ap, raw_metric, f1_score = evaluator.get_results()
 

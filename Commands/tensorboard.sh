@@ -1,1 +1,1 @@
-tensorboard --logdir ./YOLOX_outputs/yolox_tiny/tensorboard_cur
+tensorboard --logdir "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/tensorboard_cur"
