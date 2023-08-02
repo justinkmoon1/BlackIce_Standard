@@ -226,3 +226,13 @@ events.out.tfevents*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# images
+*.jpg
+*.jpeg
+*.png
+
+#annotations
+*.json
+
+*.txt
