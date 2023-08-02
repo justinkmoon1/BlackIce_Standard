@@ -235,4 +235,5 @@ Thumbs.db
 #annotations
 *.json
 
+#readme files
 *.txt
