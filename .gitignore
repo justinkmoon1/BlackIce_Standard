@@ -236,7 +236,7 @@ Thumbs.db
 *.json
 
 #readme files
-*.txt
+
 
 #files necessary for colab training
 
