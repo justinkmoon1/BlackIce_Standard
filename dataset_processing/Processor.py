@@ -64,21 +64,24 @@ class Processor():
             cur_id = 0
             cur_annot_id = 0
             for img in sampled_list:
-                for item in json_data["images"]:
-                    if item["file_name"] == img:
-                        idx = item["id"]
-                        dict["images"].append(item)
-                        dict["images"][-1]["id"] = cur_id
-                        for annot in json_data["annotations"]:
-                            if annot["image_id"] == idx:
-                                dict["annotations"].append(annot)
-                                dict["annotations"][-1]["image_id"] = cur_id
-                                dict["annotations"][-1]["id"] = cur_annot_id
-                                cur_annot_id += 1
-                cur_id += 1
+                try:
+                    for item in json_data["images"]:
+                        if item["file_name"] == img:
+                            idx = item["id"]
+                            dict["images"].append(item)
+                            dict["images"][-1]["id"] = cur_id
+                            for annot in json_data["annotations"]:
+                                if annot["image_id"] == idx:
+                                    dict["annotations"].append(annot)
+                                    dict["annotations"][-1]["image_id"] = cur_id
+                                    dict["annotations"][-1]["id"] = cur_annot_id
+                                    cur_annot_id += 1
+                    cur_id += 1
 
-                new_name = os.path.join(new_image_dir)
-                shutil.copy(image_dir + "/" + img, new_name)   
+                    new_name = os.path.join(new_image_dir)
+                    shutil.copy(image_dir + "/" + img, new_name + img)   
+                except:
+                    continue
             with open(new_annot_dir + "/" + file_name, 'w') as file:
                 json.dump(dict, file)
 
