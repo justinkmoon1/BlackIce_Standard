@@ -239,4 +239,4 @@ Thumbs.db
 *.txt
 
 #files necessary for colab training
-C:\Users\Justin Moon\BlackIce\yolox\exp\yolox_base.py
+yolox/exp/yolox_base.py
