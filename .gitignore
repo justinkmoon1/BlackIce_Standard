@@ -236,7 +236,7 @@ Thumbs.db
 *.json
 
 #readme files
-*.txt
+
 
 #files necessary for colab training
-C:\Users\Justin Moon\BlackIce\yolox\exp\yolox_base.py
+
