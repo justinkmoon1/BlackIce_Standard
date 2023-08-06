@@ -125,7 +125,7 @@ def get_trained_model(experiment, weights):
 # 경로 설정
 DATA_PATH = "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/test"
 ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/_annotations.coco.json"
-MODEL_PATH = "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/models/onetothree.pth"
+MODEL_PATH = "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/models/onetotwo_newest.pth"
 
 # data read
 with open(ANNOT_PATH, 'r') as f:
