@@ -155,6 +155,7 @@ class COCOEvaluator:
             model(x)
             model = model_trt
 
+        loss_list_in_iter = []
         for cur_iter, (imgs, _, info_imgs, ids) in enumerate(
             progress_bar(self.dataloader)
         ):
@@ -169,7 +170,9 @@ class COCOEvaluator:
                 outputs = model(imgs)
                 if decoder is not None:
                     outputs = decoder(outputs, dtype=outputs.type())
-
+                #print
+                loss = outputs["total_loss"]
+                loss_list_int_iter.append(loss)
                 if is_time_record:
                     infer_end = time_synchronized()
                     inference_time += infer_end - start
@@ -200,8 +203,11 @@ class COCOEvaluator:
         eval_results = self.evaluate_prediction(data_list, statistics)
         synchronize()
 
+        #print
+        val_loss = sum(loss_list_in_iter) / len(loss_list_in_iter)
+
         if return_outputs:
-            return eval_results, output_data
+            return eval_results, output_data, loss
         return eval_results
 
     def convert_to_coco_format(self, outputs, info_imgs, ids, return_outputs=False):
