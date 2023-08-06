@@ -29,8 +29,8 @@ class Exp(BaseExp):
         # ---------------- dataloader config ---------------- #
         # set worker to 4 for shorter dataloader init time
         # If your training process cost many memory, reduce this value.
-        #self.data_num_workers = 4
-        self.data_num_workers = 2
+        self.data_num_workers = 4
+        #self.data_num_workers = 2
         self.input_size = (640, 640)  # (height, width)
         # Actual multiscale ranges: [640 - 5 * 32, 640 + 5 * 32].
         # To disable multiscale training, set the value to 0.
@@ -76,7 +76,7 @@ class Exp(BaseExp):
         self.warmup_lr = 0
         self.min_lr_ratio = 0.05
         # learning rate for one image. During training, lr will multiply batchsize.
-        self.basic_lr_per_img = 0.01 / 64.0
+        self.basic_lr_per_img = 0.01 / 16.0
         #self.basic_lr_per_img = 0.1 / 64.0
         # name of LRScheduler
         self.scheduler = "yoloxwarmcos"
