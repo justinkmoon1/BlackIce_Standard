@@ -338,11 +338,11 @@ class Trainer:
                 evalmodel = evalmodel.module
 
         with adjust_status(evalmodel, training=False):
-            (ap50_95, ap50, summary), predictions, loss = self.exp.eval(
+            (ap50_95, ap50, summary), predictions = self.exp.eval(
                 evalmodel, self.evaluator, self.is_distributed, return_outputs=True
             )
         #print - add code here
-        self.tblogger.add_scalar("val/loss", loss, self.epoch) 
+        #self.tblogger.add_scalar("val/loss", loss, self.epoch) 
 
 
         update_best_ckpt = ap50_95 > self.best_ap
