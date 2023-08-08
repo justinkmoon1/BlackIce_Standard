@@ -123,9 +123,9 @@ def get_trained_model(experiment, weights):
     return model
 
 # 경로 설정
-DATA_PATH = "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/test"
-ANNOT_PATH = "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/_annotations.coco.json"
-MODEL_PATH = "C:/Users/Justin Moon/BlackIce/YOLOX_outputs/yolox_tiny/models/onetotwo_newest.pth"
+DATA_PATH = "BlackIce/blackice_new.v4i.coco/test"
+ANNOT_PATH = "BlackIce/blackice_new.v4i.coco/_annotations.coco.json"
+MODEL_PATH = "BlackIce/YOLOX_outputs/yolox_tiny/models/onetotwo_newest.pth"
 
 # data read
 with open(ANNOT_PATH, 'r') as f:
@@ -134,7 +134,7 @@ img_list = os.listdir(DATA_PATH)
 
 # evaluator 객체
 evaluator = Evaluator(DATA_PATH, ANNOT_PATH, MODEL_PATH)
-exps = get_exp("C:/Users/Justin Moon/BlackIce/exps/default/yolox_tiny.py", "yolox_tiny")
+exps = get_exp("BlackIce/exps/default/yolox_tiny.py", "yolox_tiny")
 model = exps.get_model()
 model.eval()
 ckpt = torch.load(MODEL_PATH, map_location = 'cpu')

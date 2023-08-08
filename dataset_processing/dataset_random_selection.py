@@ -3,25 +3,25 @@ import os
 import random
 import shutil
 
-ANNOT_PATH_TRAIN = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/annotations_real/_annotations.coco.json'
+ANNOT_PATH_TRAIN = 'BlackIce/datasets/COCO/annotations_real/_annotations.coco.json'
 #원래 어노테이션 파일 경로 (train)
 
-ANNOT_PATH_VAL = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/annotations_real/_annotations.coco.json'
+ANNOT_PATH_VAL = 'BlackIce/datasets/COCO/annotations_real/_annotations.coco.json'
 #원래 어노테이션 파일 경로 (val)
 
-IMAGE_DIR_TRAIN = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/train2017_real'
+IMAGE_DIR_TRAIN = 'BlackIce/datasets/COCO/train2017_real'
 #원래 이미지 폴더 경로 (train)
 
-IMAGE_DIR_VAL = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/val2017_real'
+IMAGE_DIR_VAL = 'BlackIce/datasets/COCO/val2017_real'
 #원래 이미지 폴더 경로 (validation)
 
-NEW_ANNOT_DIR = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/annotations'
+NEW_ANNOT_DIR = 'BlackIce/datasets/COCO/annotations'
 #어노테이션 파일이 이동한 후 위치할 폴더의 경로
 
-NEW_IMAGE_DIR_TRAIN = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/train2017'
+NEW_IMAGE_DIR_TRAIN = 'BlackIce/datasets/COCO/train2017'
 #이미지 파일이 이동한 후 위치할 폴더의 경로 (train)
 
-NEW_IMAGE_DIR_VAL = 'C:/Users/Justin Moon/BlackIce/datasets/COCO/val2017'
+NEW_IMAGE_DIR_VAL = 'BlackIce/datasets/COCO/val2017'
 #이미지 파일이 이동한 후 위치할 폴더의 경로 (validation)
 
 FILE_NAME_TRAIN = '_annotations.coco.json'

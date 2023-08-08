@@ -4,7 +4,7 @@ import os
 import json
 
 IMAGE_DIR = ""
-ANNOT_DIR = "C:/Users/Justin Moon/BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/라벨링데이터_230222_add/VL_Bounding Box_27.침수구간"
+ANNOT_DIR = "BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/라벨링데이터_230222_add/VL_Bounding Box_27.침수구간"
 
 lst = os.listdir(ANNOT_DIR)
 print(lst)

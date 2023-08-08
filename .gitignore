@@ -240,3 +240,8 @@ Thumbs.db
 
 #files necessary for colab training
 
+#directory differences
+Commands/demo.sh
+Commands/tensorboard.sh
+Commands/train_custom.sh
+Commands/train.sh

@@ -31,7 +31,7 @@ import os
 import json
 import shutil
 """
-PATH = "C:/Users/Justin Moon/BlackIce/images"
+PATH = "BlackIce/images"
 
 file_list = os.listdir(PATH)
 num = 1
@@ -48,7 +48,7 @@ for f in file_list:
 """
 #실외 데이터
 """
-PATH = "C:/Users/Justin Moon/BlackIce/images"
+PATH = "BlackIce/images"
 
 file_list = os.listdir(PATH)
 num = 1
@@ -80,9 +80,9 @@ for f in file_list:
     O_SN_20210825T152815_w0009.png"""
 
 #이륜차 데이터
-PATH = "C:/Users/Justin Moon/BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/원천데이터_230222_add/VS_Bounding Box_27.침수구간"
+PATH = "BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/원천데이터_230222_add/VS_Bounding Box_27.침수구간"
 #이미지가 위치한 폴더 경로
-JSON_PATH = "C:/Users/Justin Moon/BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/라벨링데이터_230222_add/VL_Bounding Box_27.침수구간"
+JSON_PATH = "BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/라벨링데이터_230222_add/VL_Bounding Box_27.침수구간"
 #어노테이션이 위치한 폴더 경로
 
 file_list = os.listdir(PATH)
