@@ -45,7 +45,7 @@ class Exp(BaseExp):
         # name of annotation file for evaluation
         self.val_ann = "instances_val2017.json"
         # name of annotation file for testing
-        self.test_ann = "instances_train2017.json"
+        self.test_ann = "instances_test2017.json"
 
         # --------------- transform config ----------------- #
         # prob of applying mosaic aug
