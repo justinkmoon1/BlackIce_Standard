@@ -1,2 +1,0 @@
-#python tools/demo.py image -n yolox_tiny -c ./YOLOX_outputs/yolox_tiny/$1 --path ./assets/$2 --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu
-python tools/demo.py image -n yolox_tiny -c ./YOLOX_outputs/yolox_tiny/models/onetotwo_newest.pth --path "C:/Users/Justin Moon/BlackIce/blackice_new.v4i.coco/train/IMG_1089-2_jpg.rf.09d1c72e21babf96501d8451400b98a6.jpg" --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu
