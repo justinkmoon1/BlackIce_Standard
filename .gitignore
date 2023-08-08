@@ -245,3 +245,4 @@ Commands/demo.sh
 Commands/tensorboard.sh
 Commands/train_custom.sh
 Commands/train.sh
+yolox/exp/yolox_base_local.py
