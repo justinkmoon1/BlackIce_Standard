@@ -20,10 +20,11 @@ class Evaluator():
         self.model_path = model_path
 
         # class 에 대한 cnts
-        self.cnts = {0: [0, 0], 1: [0, 0], 2: [0, 0], 3: [0, 0], 4: [0, 0], 5: [0, 0]}
+        self.cnts = {0: [0, 0], 1: [0, 0], 2: [0, 0], 3: [0, 0], 4: [0, 0]}
         # 전체 fp
-        self.fp_cnts = {0: 0, 1: 0, 2:0, 3:0, 4:0, 5:0}
-
+        self.fp_cnts = {0: 0, 1: 0, 2:0, 3:0, 4:0}
+        self.fp_same = 0
+        self.fp_dif = 0
     def read_data(self, img, idx):
         with open(self.annot_path, 'r') as f:
             json_data = json.load(f)
@@ -96,6 +97,7 @@ class Evaluator():
         # prediction bbox 를 for loop 돌면서 actual 랑 비교
         for i, pred_bbox in enumerate(pred_bbox_list):
             # iou 비교 
+            
             for j, actual_bbox in enumerate(actual_bbox_list):
                 #print(pred_bbox, actual_bbox)
                 iou = self.calc_iou(pred_bbox,actual_bbox)
@@ -109,7 +111,11 @@ class Evaluator():
                         self.cnts[pred_label_list[i]][0] += 1
                         
                         self.fp_cnts[pred_label_list[i]] += 1
-
+                else:
+                    if pred_label_list[i] == actual_label_list[j]:
+                        self.fp_same += 1
+                    else:
+                        self.fp_dif += 1
         
     
     # self.cnts 로 ap 계산

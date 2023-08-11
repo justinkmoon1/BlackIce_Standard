@@ -207,7 +207,7 @@ class Trainer:
     def before_epoch(self):
         logger.info("---> start train epoch{}".format(self.epoch + 1))
         self.epoch_loss = []
-        logger.info("len(self.epoch_loss) : {}".format(len(self.epoch_loss)))
+        logger.info("len(self.epoch_loss) : {}".format(self.epoch_loss))
         
         if self.epoch + 1 == self.max_epoch - self.exp.no_aug_epochs or self.no_aug:
             logger.info("--->No mosaic aug now!")
@@ -225,6 +225,7 @@ class Trainer:
         self.save_ckpt(ckpt_name="latest")
         #print
         loss = sum(self.epoch_loss)/len(self.epoch_loss)
+        logger.info("loss : {}".format(self.epoch_loss))
         if self.args.logger == "tensorboard":
             self.tblogger.add_scalar("train/loss", loss, self.epoch) 
             

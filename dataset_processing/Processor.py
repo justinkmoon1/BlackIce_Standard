@@ -86,6 +86,47 @@ class Processor():
                 json.dump(dict, file)
 
 
+    def sample_selection(self, annot_path, new_annot_dir, image_dir, new_image_dir, file_name):
+            '''특정 데이터셋으로부터 num_images 만큼의 이미지를 랜덤하게 선택하고, 이를 annotation과 함께 기존 path에서 new_path로 이동하는 함수
+            -file_name은 이동했을 때의 annotation 파일명
+            -랜덤 데이터셋 추출-
+            annot_path: 기존 annotation 파일 경로
+            new_annot_dir: 수정될 annotation 파일의 디렉토리'
+            image_dir: 기존 이미지 파일 디렉토리
+            new_image_dir: 이미지들이 옮겨질 디렉토리
+            num_images: 랜덤하게 선정할 이미지들의 개수
+            file_name: 새 annotation 파일의 이름
+            '''
+            with open(annot_path , 'r') as f:
+                json_data = json.load(f)
+                dict = {"info": json_data["info"], "licenses": json_data["licenses"], "categories": json_data["categories"], "images": [], "annotations" : []}
+                file_list = os.listdir(image_dir)
+
+                cur_id = 0
+                cur_annot_id = 0
+                for img in file_list:
+                    try:
+                        for item in json_data["images"]:
+                            if item["file_name"] == img:
+                                idx = item["id"]
+                                dict["images"].append(item)
+                                dict["images"][-1]["id"] = cur_id
+                                for annot in json_data["annotations"]:
+                                    if annot["image_id"] == idx:
+                                        dict["annotations"].append(annot)
+                                        dict["annotations"][-1]["image_id"] = cur_id
+                                        dict["annotations"][-1]["id"] = cur_annot_id
+                                        cur_annot_id += 1
+                        cur_id += 1
+
+                        new_name = os.path.join(new_image_dir)
+                        shutil.copy(image_dir + "/" + img, new_name + "/" + img)   
+                    except:
+                        continue
+                with open(new_annot_dir + "/" + file_name, 'w') as file:
+                    json.dump(dict, file)
+
+
     def image_resize(self, image_dir, x, y):
         '''주어진 image_dir 안에 있는 모든 image들을 (x, y) dimension의 이미지로 변환해주는 함수
         image_dir: 이미지 파일들이 위치한 경로
