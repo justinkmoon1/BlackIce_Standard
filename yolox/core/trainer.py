@@ -225,7 +225,7 @@ class Trainer:
         self.save_ckpt(ckpt_name="latest")
         #print
         loss = sum(self.epoch_loss)/len(self.epoch_loss)
-        logger.info("loss : {}".format(self.epoch_loss))
+        logger.info("loss : {}".format(loss))
         if self.args.logger == "tensorboard":
             self.tblogger.add_scalar("train/loss", loss, self.epoch) 
             
