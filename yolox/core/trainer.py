@@ -43,6 +43,7 @@ class Trainer:
         #print
         self.epoch_loss = []
         self.epoch_val_loss = []
+        self.best_ckpt = 0
         # training related attr
         self.max_epoch = exp.max_epoch
         self.amp_training = args.fp16
@@ -200,6 +201,8 @@ class Trainer:
         logger.info(
             "Training of experiment is done and the best AP is {:.2f}".format(self.best_ap * 100)
         )
+        #print
+        logger.info("The epoch that gave the best ckpt was {:.2f}".format(self.best_ckpt))
         if self.rank == 0:
             if self.args.logger == "wandb":
                 self.wandb_logger.finish()
@@ -347,6 +350,9 @@ class Trainer:
 
 
         update_best_ckpt = ap50_95 > self.best_ap
+        #print
+        if update_best_ckpt:
+            self.best_ckpt = self.epoch + 1
         self.best_ap = max(self.best_ap, ap50_95)
 
         if self.rank == 0:

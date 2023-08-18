@@ -82,15 +82,15 @@ for f in file_list:
 #이륜차 데이터
 PATH = "BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/원천데이터_230222_add/VS_Bounding Box_27.침수구간"
 #이미지가 위치한 폴더 경로
-JSON_PATH = "BlackIce/183.이륜자동차 안전 위험 시설물 데이터/01.데이터/2.Validation/라벨링데이터_230222_add/VL_Bounding Box_27.침수구간"
+JSON_PATH = "183.이륜자동차 안전 위험 시설물 데이터/01.데이터/1.Training/라벨링테이터_230222_add/TL_Bounding Box_27.침수구간"
 #어노테이션이 위치한 폴더 경로
 
-file_list = os.listdir(PATH)
+file_list = os.listdir(JSON_PATH)
 dict = {}
 for f in file_list:
     prefix = ""
     datetime = ""
-    with open(JSON_PATH + "/" + f[:-3] + "json", 'r', encoding = "UTF8") as file:
+    with open(JSON_PATH + "/" + f, 'r', encoding = "UTF8") as file:
         json_data = json.load(file)
         
         if json_data["images"]["collect_weather"] == "맑음":
@@ -110,9 +110,10 @@ for f in file_list:
                 dict[datetime] = 1
         except:
             continue    
+        file.close()
         print("O_" + prefix + "_" + datetime + "_w" + "0" * (5 - len(str(dict[datetime]))) + str(dict[datetime]))
-        os.rename(PATH + "/" + f, PATH + "/" + "O_" + prefix + "_" + datetime + "_w" + "0" * (5 - len(str(dict[datetime]))) + str(dict[datetime]) + ".png")
-        os.rename(JSON_PATH + "/" + f[:-3] + "json", JSON_PATH + "/" + "O_" + prefix + "_" + datetime + "_w" + "0" * (5 - len(str(dict[datetime]))) + str(dict[datetime]) + ".json")
+        #os.rename(PATH + "/" + f, PATH + "/" + "O_" + prefix + "_" + datetime + "_w" + "0" * (5 - len(str(dict[datetime]))) + str(dict[datetime]) + ".png")
+        os.rename(JSON_PATH + "/" + f, "Named" + "/" + "O_" + prefix + "_" + datetime + "_w" + "0" * (5 - len(str(dict[datetime]))) + str(dict[datetime]) + ".json")
     
 
     
