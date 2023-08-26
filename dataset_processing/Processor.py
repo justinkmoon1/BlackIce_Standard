@@ -120,7 +120,7 @@ class Processor():
                         cur_id += 1
 
                         new_name = os.path.join(new_image_dir)
-                        shutil.copy(image_dir + "/" + img, new_name + "/" + img)   
+                        #shutil.copy(image_dir + "/" + img, new_name + "/" + img)   
                     except:
                         continue
                 with open(new_annot_dir + "/" + file_name, 'w') as file:

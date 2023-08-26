@@ -1,14 +1,14 @@
 from Processor import Processor
 
-ANNOT_PATH = "newdata-20230809T180348Z-001/newdata/train/ID2TR.json"
+ANNOT_PATH = "Background_mixed/annotations/ID2TE.json"
 
-NEW_ANNOT_PATH = "datasets/COCO/annotations/"
+NEW_ANNOT_PATH = "Background_mixed/annotations"
 
-IMAGE_DIR = "newdata-20230809T180348Z-001/newdata/test"
+IMAGE_DIR = "Background_mixed/test"
 
-NEW_IMAGE_DIR = "datasets/COCO/train2017"
+NEW_IMAGE_DIR = "Background_mixed/valid"
 
-FILE_NAME = "ID2TR.json"
+FILE_NAME = "ID2TE_Mixed.json"
 
 
 processor = Processor()
