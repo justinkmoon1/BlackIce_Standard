@@ -125,7 +125,7 @@ class Processor():
                     cur_id += 1
 
                     new_name = os.path.join(new_image_dir)
-                    shutil.copy(image_dir + "/" + img, new_name)
+                    shutil.copy(image_dir + "/" + item["file_name"], new_name)
                 with open(new_annot_dir + "/" + file_name, 'w') as file:
                     json.dump(dict, file)
 
